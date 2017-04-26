@@ -27,9 +27,14 @@ Client.delete_all
 Presence.delete_all
 Node.delete_all
 
-agency = Agency.create name: "agency"
-client = Client.create name: "client", agency_id: agency.id
-presence = Presence.create name: "presence", client_id: client.id
+begin
+  agency = Agency.create name: "agency"
+  client = Client.create name: "client", agency_id: agency.id
+  presence = Presence.create name: "presence", client_id: client.id
+rescue Exception => e
+  puts e.inspect
+  puts e.backtrace
+end
 
 binding.pry if ENV['DEBUG'].present?
 
