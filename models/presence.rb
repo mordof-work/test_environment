@@ -1,7 +1,7 @@
 class Presence < ApplicationRecord
   # Inverse of for the situation where node.rb has the has_one :presence
   # available
-  if ENV['OLD_VERSION'].present?
+  if ENV['OLD'].present?
     belongs_to :node, dependent: :destroy, inverse_of: :presence
     belongs_to :client
   else

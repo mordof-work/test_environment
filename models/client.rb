@@ -1,7 +1,7 @@
 class Client < ApplicationRecord
   # Inverse of for the situation where node.rb has the has_one :client
   # available
-  if ENV['OLD_VERSION'].present?
+  if ENV['OLD'].present?
     belongs_to :node, dependent: :destroy, inverse_of: :client
     belongs_to :agency
   else
