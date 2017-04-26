@@ -22,7 +22,6 @@ FactoryGirl.define do
   factory :node do
     class_name 'Presence'
     name { "presence node" }
-    data_start_date { Date.today }
 
     factory :presence_node do
       class_name 'Presence'
