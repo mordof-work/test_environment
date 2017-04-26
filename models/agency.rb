@@ -1,10 +1,10 @@
 class Agency < ApplicationRecord
-  if ENV['TEST'].present?
-    # Inverse of for the situation where node.rb has the has_one :agency
-    # available
-    belongs_to :node, dependent: :destroy, inverse_of: :agency, optional: true
+  # Inverse of for the situation where node.rb has the has_one :agency
+  # available
+  if ENV['OLD_VERSION'].present?
+    belongs_to :node, dependent: :destroy, inverse_of: :agency
   else
-    belongs_to :node, dependent: :destroy, optional: true
+    belongs_to :node, dependent: :destroy, inverse_of: :agency, optional: true
   end
 
   after_create :link_node

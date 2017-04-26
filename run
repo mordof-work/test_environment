@@ -1,6 +1,4 @@
 #!/usr/bin/env ruby
 
-ENV['TEST']= 'true'
-
 require 'require_all'
 require_all 'test/test.rb'
