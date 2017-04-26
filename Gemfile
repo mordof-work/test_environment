@@ -1,9 +1,9 @@
 source 'https://rubygems.org'
 
 if ENV['OLD']
-  gem 'activesupport', '4.2.6'
-  gem 'activemodel', '4.2.6'
-  gem 'activerecord', '4.2.6'
+  gem 'activesupport', '4.1.5'
+  gem 'activemodel', '4.1.5'
+  gem 'activerecord', '4.1.5'
 else
   gem 'activesupport', '5.0.2'
   gem 'activemodel', '5.0.2'
