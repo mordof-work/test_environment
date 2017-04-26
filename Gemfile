@@ -1,12 +1,14 @@
 source 'https://rubygems.org'
 
-gem 'activesupport', '5.0.2'
-gem 'activemodel', '5.0.2'
-gem 'activerecord', '5.0.2'
-
-# gem 'activesupport', '4.2.6'
-# gem 'activemodel', '4.2.6'
-# gem 'activerecord', '4.2.6'
+if ENV['OLD_VERSION'].present?
+  gem 'activesupport', '4.2.6'
+  gem 'activemodel', '4.2.6'
+  gem 'activerecord', '4.2.6'
+else
+  gem 'activesupport', '5.0.2'
+  gem 'activemodel', '5.0.2'
+  gem 'activerecord', '5.0.2'
+end
 
 gem 'pg'
 gem 'require_all'
