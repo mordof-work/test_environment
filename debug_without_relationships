@@ -1,0 +1,6 @@
+#!/usr/bin/env ruby
+
+ENV['DEBUG'] = 'true'
+
+require 'require_all'
+require_all 'test/test.rb'
