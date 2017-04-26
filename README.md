@@ -8,6 +8,8 @@ If I comment those three out, and remove the inverse in the belongs_to for each 
 
 This was never a problem in Rails 4.2 (ActiveRecord/Model/Support 4.2.6), but showed up in ActiveRecord/Model/Support 5.0.2
 
+To further make matters worse. This test environment shows the issue in BOTH 4.2.6 *AND* 5.0.2. Why does this work in my production code for 4.2.6? What could possibly make this work?
+
 # Environment
 Bundler 1.14.6
 

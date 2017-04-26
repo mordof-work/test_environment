@@ -18,7 +18,9 @@ ActiveRecord::Base.establish_connection(
 require_all 'models/application_record.rb'
 require_all 'models'
 
+#########################################
 # Actual Code for the Test
+#########################################
 
 Agency.delete_all
 Client.delete_all
