@@ -18,38 +18,20 @@ ActiveRecord::Base.establish_connection(
 require_all 'models/application_record.rb'
 require_all 'models'
 
-FactoryGirl.define do
-  factory :node do
-    class_name 'Presence'
-    name { "presence node" }
-
-    factory :presence_node do
-      class_name 'Presence'
-      name { "presence node" }
+if ENV['USE_FACTORY_GIRL'].present?
+  FactoryGirl.define do
+    factory :agency do
+      name { "agency" }
     end
 
-    factory :client_node do
-      class_name 'Client'
-      name { "client node" }
+    factory :client do
+      agency
+      name { "client name" }
     end
 
-    factory :agency_node do
-      class_name 'Agency'
-      name { "agency node" }
+    factory :presence do
+      client
+      name { "presence name" }
     end
-  end
-
-  factory :agency do
-    name { "agency" }
-  end
-
-  factory :client do
-    agency
-    name { "client name" }
-  end
-
-  factory :presence do
-    client
-    name { "presence name" }
   end
 end

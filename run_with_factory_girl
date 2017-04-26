@@ -1,0 +1,7 @@
+#!/usr/bin/env ruby
+
+ENV['TEST']= 'true'
+ENV['USE_FACTORY_GIRL'] = 'true'
+
+require 'require_all'
+require_all 'test/test.rb'
