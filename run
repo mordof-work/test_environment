@@ -1,4 +1,4 @@
 #!/usr/bin/env ruby
 
 require 'require_all'
-require_all 'test/test.rb'
+require_all 'init.rb'
