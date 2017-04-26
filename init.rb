@@ -17,21 +17,3 @@ ActiveRecord::Base.establish_connection(
 
 require_all 'models/application_record.rb'
 require_all 'models'
-
-if ENV['USE_FACTORY_GIRL'].present?
-  FactoryGirl.define do
-    factory :agency do
-      name { "agency" }
-    end
-
-    factory :client do
-      agency
-      name { "client name" }
-    end
-
-    factory :presence do
-      client
-      name { "presence name" }
-    end
-  end
-end

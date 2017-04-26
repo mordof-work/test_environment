@@ -16,8 +16,6 @@ GEM
     byebug (8.2.2)
     coderay (1.1.1)
     concurrent-ruby (1.0.5)
-    factory_girl (4.8.0)
-      activesupport (>= 3.0.0)
     i18n (0.8.1)
     method_source (0.8.2)
     minitest (5.10.1)
@@ -43,7 +41,6 @@ DEPENDENCIES
   activerecord (= 5.0.2)
   activesupport (= 5.0.2)
   byebug (>= 8.1.0)
-  factory_girl
   pg
   pry-byebug (>= 3.3.0)
   require_all
