@@ -50,14 +50,10 @@ require_all 'models'
 #########################################
 
 Agency.delete_all
-Client.delete_all
-Presence.delete_all
 Node.delete_all
 
 begin
   agency = Agency.create name: "agency"
-  # client = Client.create name: "client", agency_id: agency.id
-  # presence = Presence.create name: "presence", client_id: client.id
 rescue Exception => e
   puts e.inspect
   puts e.backtrace

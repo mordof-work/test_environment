@@ -7,6 +7,4 @@ class Node < ApplicationRecord
   ######################
 
   has_one :agency
-  has_one :client
-  has_one :presence
 end

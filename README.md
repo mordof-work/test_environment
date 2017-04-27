@@ -2,9 +2,9 @@
 Recreating a bug to resolve a problem
 
 # The problem
-Whenever I use ./run, I get a stack level too deep issue. This stems from models/node.rb where has_one :presence, has_one :client, has_one :agency is placed.
+Whenever I use ./run, I get a stack level too deep. This stems from models/node.rb where has_one :agency is placed.
 
-If I comment those three out, this issue goes away.
+If I comment it out, this issue goes away.
 
 This was never a problem in ActiveRecord/Model/Support 4.1.5, but showed up in ActiveRecord/Model/Support 5.0.2
 
@@ -30,8 +30,6 @@ pg_dump.sql to create the relevant schema for the database.
 
 # Explanation of relationships:
 
-Agency contains Clients
+Agency contains Clients, which contains Presences. this test example only has Agencies, as the clients and presences are not relevant in recreating the problem.
 
-Clients contain Presences
-
-Each Agency/Client/Presence has a Node as an ambiguous entity so we can make stuff not care what part of the hierarchy we're at. The node has a has_one reference back to all 3, but only 1 will be populated for each Node.
+Each Agency has a Node as an ambiguous entity so we can make stuff not care what part of the hierarchy we're at. The node has a has_one reference back to all layers, but only 1 will be populated for each Node.
