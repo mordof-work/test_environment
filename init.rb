@@ -1,4 +1,13 @@
+if ENV['NULLDB']
+  class Rails
+    def self.root
+      "./"
+    end
+  end
+end
+
 require 'rubygems'
+require 'active_record' if ENV['NULLDB']
 require 'bundler'
 require 'require_all'
 Bundler.require
@@ -6,14 +15,18 @@ Bundler.require
 require 'active_record'
 
 ActiveRecord::Base.default_timezone = :utc
-ActiveRecord::Base.establish_connection(
-  adapter: 'postgresql',
-  encoding: 'unicode',
-  database: 'test_circular',
-  username: 'mordof',
-  host: '127.0.0.1',
-  pool: 5
-)
+if ENV['NULLDB']
+  ActiveRecord::Base.establish_connection adapter: :nulldb, schema: 'schema.rb'
+else
+  ActiveRecord::Base.establish_connection(
+    adapter: 'postgresql',
+    encoding: 'unicode',
+    database: 'test_circular',
+    username: 'mordof',
+    host: '127.0.0.1',
+    pool: 5
+  )
+end
 
 require_all 'models/application_record.rb'
 require_all 'models'

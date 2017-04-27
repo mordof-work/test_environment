@@ -10,7 +10,12 @@ else
   gem 'activerecord', '5.0.2'
 end
 
-gem 'pg'
+if ENV['NULLDB']
+  gem 'activerecord-nulldb-adapter'
+else
+  gem 'pg'
+end
+
 gem 'require_all'
 gem 'byebug', '>= 8.1.0'
 gem 'pry-byebug', '>= 3.3.0'
