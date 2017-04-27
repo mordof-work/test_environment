@@ -23,3 +23,11 @@ The schema dump does not create the database for you, nor does it set the owner.
 The username/database are in init.rb lines 12/13 to configure.
 
 pg_dump.sql to create the relevant schema for the database.
+
+# Explanation of relationships:
+
+Agency contains Clients
+
+Clients contain Presences
+
+Each Agency/Client/Presence has a Node as an ambiguous entity so we can make stuff not care what part of the hierarchy we're at. The node has a has_one reference back to all 3, but only 1 will be populated for each Node.
