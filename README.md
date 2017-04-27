@@ -12,6 +12,8 @@ This was never a problem in ActiveRecord/Model/Support 4.1.5, but showed up in A
 
 After clearing out all my gems, and reinstalling versions 4.1.5 and 5.0.2 of the three gems, the old version works again - like my actual production code does. I'm not sure what caused the mishap along the way.
 
+5.0.2 versions of the three gems, the problem still persists.
+
 # Environment
 Bundler 1.14.6
 
