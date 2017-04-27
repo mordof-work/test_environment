@@ -6,9 +6,11 @@ Whenever I use ./run, I get a stack level too deep issue. This stems from models
 
 If I comment those three out, this issue goes away.
 
-This was never a problem in Rails 4.2 (ActiveRecord/Model/Support 4.2.6), but showed up in ActiveRecord/Model/Support 5.0.2
+This was never a problem in ActiveRecord/Model/Support 4.1.5, but showed up in ActiveRecord/Model/Support 5.0.2
 
-To further make matters worse. This test environment shows the issue in BOTH 4.2.6 *AND* 5.0.2. Why does this work in my production code for 4.2.6? What could possibly make this work? If anyone knows what could make this behavior function, without changing this code specifically, please let me know.
+-To further make matters worse. This test environment shows the issue in BOTH 4.1.5 *AND* 5.0.2. Why does this work in my production code for 4.1.5? What could possibly make this work? If anyone knows what could make this behavior function, without changing this code specifically, please let me know.-
+
+After clearing out all my gems, and reinstalling versions 4.1.5 and 5.0.2 of the three gems, the old version works again - like my actual production code does. I'm not sure what caused the mishap along the way.
 
 # Environment
 Bundler 1.14.6

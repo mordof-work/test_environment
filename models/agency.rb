@@ -11,10 +11,10 @@ class Agency < ApplicationRecord
   around_save :update_node
 
   def link_node
-    mynode = Node.create class_name: self.class.to_s, is_deleted: is_deleted, name: name
-    self.node_id = mynode.id
-    self.save!
-    # create_node( class_name: self.class.to_s, is_deleted: is_deleted, name: name )
+    # mynode = Node.create class_name: self.class.to_s, is_deleted: is_deleted, name: name
+    # self.node_id = mynode.id
+    # self.save!
+    create_node( class_name: self.class.to_s, is_deleted: is_deleted, name: name )
   end
 
   def update_node

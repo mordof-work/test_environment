@@ -56,8 +56,8 @@ Node.delete_all
 
 begin
   agency = Agency.create name: "agency"
-  client = Client.create name: "client", agency_id: agency.id
-  presence = Presence.create name: "presence", client_id: client.id
+  # client = Client.create name: "client", agency_id: agency.id
+  # presence = Presence.create name: "presence", client_id: client.id
 rescue Exception => e
   puts e.inspect
   puts e.backtrace
