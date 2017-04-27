@@ -3,12 +3,26 @@ if ENV['NULLDB']
     def self.root
       "./"
     end
+
+    def self.env
+      'test'
+    end
   end
 end
 
 require 'rubygems'
-require 'active_record' if ENV['NULLDB']
 require 'bundler'
+
+if ENV['NULLDB']
+  if ENV['OLD']
+    gem 'activesupport', '4.1.5'
+    gem 'activemodel', '4.1.5'
+    gem 'activerecord', '4.1.5'
+  end
+
+  require 'active_record'
+end
+
 require 'require_all'
 Bundler.require
 
