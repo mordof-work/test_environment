@@ -42,6 +42,8 @@ else
   )
 end
 
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+
 require_all 'models/application_record.rb'
 require_all 'models'
 
