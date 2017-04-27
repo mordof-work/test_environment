@@ -5,6 +5,8 @@ If I comment it out, this issue goes away.
 
 Agency has a after_create callback to create a Node, and an around_save callback to ensure the name/is_deleted fields of agency get applied to node. This ends up going into an infinite circular reference with around_save updating the related node, calling node.save, and somehow the node.save is triggering another save on the agency entity.
 
+Note: Testing with NullDB Adapter in the newer gem versions does not exhibit a Stack-level too deep. Haven't figured out why that is.
+
 This was never a problem in ActiveRecord/Model/Support 4.1.5, but showed up in ActiveRecord/Model/Support 5.0.2
 
 ~~To further make matters worse. This test environment shows the issue in BOTH 4.1.5 *AND* 5.0.2. Why does this work in my production code for 4.1.5? What could possibly make this work? If anyone knows what could make this behavior function, without changing this code specifically, please let me know.~~
