@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+
+width=$1
+
+old_output=`OLD=true bundle > /dev/null && WIDTH=${width} OLD=true ./run`
+old_refer_output=`OLD=true bundle > /dev/null && REFER_BEFORE=true WIDTH=${width} OLD=true ./run`
+new_output=`bundle > /dev/null && WIDTH=${width} ./run`
+new_refer_output=`bundle > /dev/null && REFER_BEFORE=true WIDTH=${width} ./run`
+
+mapfile -t old <<< "$old_output"
+mapfile -t old_refer <<< "$old_refer_output"
+mapfile -t new <<< "$new_output"
+mapfile -t new_refer <<< "$new_refer_output"
+
+lengths=(${#old[@]} ${#old_refer[@]} ${#new[@]} ${#new_refer[@]})
+
+max_length=${lengths[0]}
+
+for i in "${lengths[@]}"
+do
+  if [[ "$i" -gt "$max_length" ]]; then
+    max_length=$i
+  fi
+done
+
+for i in $(seq 0 $max_length)
+do
+  printf "%-${width}s | %-${width}s | %-${width}s | %-${width}s\n" "${old[$i]}" "${old_refer[$i]}" "${new[$i]}" "${new_refer[$i]}"
+done
+
+
+
+
+
+
+
+
+
+
+# paste <(OLD=true bundle > /dev/null && OLD=true ./run) <(bundle > /dev/null && ./run | sed -e 's/^/| /') | column -s $'\t' -t

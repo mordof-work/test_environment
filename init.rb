@@ -42,8 +42,6 @@ else
   )
 end
 
-ActiveRecord::Base.logger = Logger.new(STDOUT)
-
 require_all 'models/application_record.rb'
 require_all 'models'
 
@@ -54,14 +52,35 @@ require_all 'models'
 Agency.delete_all
 Node.delete_all
 
+if ENV['OLD']
+  puts
+  puts "Rails 4.1.2#{ENV['REFER_BEFORE'] ? ' - Earlier Node Ref' : ''}"
+  puts
+else
+  puts
+  puts "Rails 5.0.2#{ENV['REFER_BEFORE'] ? ' - Earlier Node Ref' : ''}"
+  puts
+end
+
 begin
-  agency = Agency.create name: "agency"
+  # node = Node.create class_name: "Agency"
+  agency = Agency.create name: "agency_name"#, node_id: node.id
+  # agency.name = "bar"
+  # agency.save
+
+  puts
+  puts
+  puts "Name Result: #{agency.node.name}"
+
+  # agency.name = "bar"
+  # agency.save
+
+  # puts agency.node.name'
 rescue Exception => e
   puts e.inspect
-  puts e.backtrace
+  # puts e.backtrace
 end
 
 binding.pry if ENV['DEBUG'].present?
-
-puts ""
+puts "" if ENV['DEBUG'].present?
 

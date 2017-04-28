@@ -9,33 +9,37 @@ class Agency < ApplicationRecord
   around_save :update_node
 
   def link_node
-    # mynode = Node.create class_name: self.class.to_s, is_deleted: is_deleted, name: name
-    # self.node_id = mynode.id
-    # self.save!
-    create_node( class_name: self.class.to_s, is_deleted: is_deleted, name: name )
+    puts "Created Node"
+    puts "new after node create?: #{new_record?}"
+    puts "name changed after node create?: #{name_changed?}"
+    @freshly_made_node = true
+    create_node class_name: self.class.to_s, name: self.name, is_deleted: self.is_deleted
   end
 
   def update_node
-    can_continue = !new_record?
+    @count ||= 0
+    rnd = Random.rand(1000)
+    puts '-' * ENV['WIDTH'].to_i
+    puts "New Record: #{new_record?}"
+    puts "Fresh Node: #{@freshly_made_node}"
+    puts "Node Present?: #{node.present?}" if ENV['REFER_BEFORE']
+    puts "Node Present?: --------" unless ENV['REFER_BEFORE']
+    puts "Name Changed?: #{name_changed?}"
+    puts '-' * ENV['WIDTH'].to_i
+    puts "Before Save #{rnd}"
     yield
-    return true unless can_continue
-
-    puts node.present?
-    puts name_changed?
-    puts is_deleted_changed?
-    ##########
-    ## This line is critical!!!! At this point node is not present.
-    ## It looks like ActiveRecord/ActiveModel (not sure which) changed the
-    ## order in which after_create gets called in relation to around_save.
-    #
-    ## I also wonder if this was an intentional change.
-    ##########
+    puts "After Save #{rnd}"
+    @count += 1
+    if @count > 3
+      puts "~~ Hit the Count Limit ~~"
+      return
+    end
+    # puts "Node2 Present?: #{node.present?}"
     if node.present? && (name_changed? || is_deleted_changed?)
-      # node.name = name
-      # node.is_deleted = is_deleted
-      # Agency.suppress do
-        node.save
-      # end
+      @freshly_made_node = false
+      node.name = name
+      node.is_deleted = is_deleted
+      node.save
     end
   end
 end
