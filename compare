@@ -27,14 +27,3 @@ for i in $(seq 0 $max_length)
 do
   printf "%-${width}s | %-${width}s | %-${width}s | %-${width}s\n" "${old[$i]}" "${old_refer[$i]}" "${new[$i]}" "${new_refer[$i]}"
 done
-
-
-
-
-
-
-
-
-
-
-# paste <(OLD=true bundle > /dev/null && OLD=true ./run) <(bundle > /dev/null && ./run | sed -e 's/^/| /') | column -s $'\t' -t
