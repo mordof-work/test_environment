@@ -25,5 +25,5 @@ done
 
 for i in $(seq 0 $max_length)
 do
-  printf "%-${width}s | %-${width}s | %-${width}s | %-${width}s\n" "${old[$i]}" "${old_refer[$i]}" "${new[$i]}" "${new_refer[$i]}"
+  printf "| %-${width}s | %-${width}s | %-${width}s | %-${width}s |\n" "${old[$i]}" "${old_refer[$i]}" "${new[$i]}" "${new_refer[$i]}"
 done
