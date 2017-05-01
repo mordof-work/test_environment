@@ -72,10 +72,10 @@ begin
   puts
   puts "Name Result: #{agency.node.name}"
 
-  # agency.name = "bar"
-  # agency.save
+  agency.name = "bar"
+  agency.save
 
-  # puts agency.node.name'
+  puts agency.node.name
 rescue Exception => e
   puts e.inspect
   # puts e.backtrace

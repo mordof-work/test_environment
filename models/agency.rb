@@ -6,40 +6,35 @@ class Agency < ApplicationRecord
   end
 
   after_create :link_node
-  around_save :update_node
+  after_update :update_node
 
   def link_node
-    puts "Created Node"
-    puts "new after node create?: #{new_record?}"
-    puts "name changed after node create?: #{name_changed?}"
-    @freshly_made_node = true
     create_node class_name: self.class.to_s, name: self.name, is_deleted: self.is_deleted
   end
 
   def update_node
-    @count ||= 0
-    rnd = Random.rand(1000)
-    puts '-' * ENV['WIDTH'].to_i
-    puts "New Record: #{new_record?}"
-    puts "Fresh Node: #{@freshly_made_node}"
-    puts "Node Present?: #{node.present?}" if ENV['REFER_BEFORE']
-    puts "Node Present?: --------" unless ENV['REFER_BEFORE']
-    puts "Name Changed?: #{name_changed?}"
-    puts '-' * ENV['WIDTH'].to_i
-    puts "Before Save #{rnd}"
-    yield
-    puts "After Save #{rnd}"
-    @count += 1
-    if @count > 3
-      puts "~~ Hit the Count Limit ~~"
-      return
+    # the @node_updated_details is the important part in resolving this endless circular reference.
+    # it keeps track of the name, and is_deleted details being set on the node.
+    #
+    # If the node details is missing, or node details are not the details the
+    # agency currently has, it'll go through. if it's present, and matching -
+    # then we won't try to save the node *again*.
+
+    if @node_updated_details.present?
+      if @node_updated_details[:name] == name && @node_updated_details[:is_deleted] == is_deleted
+        # this double-if block is a cleaner way to write it than a single line
+        # if statement below. We don't want to continue if we're already attempting
+        # to set the details here.
+        return
+      end
     end
-    # puts "Node2 Present?: #{node.present?}"
+
     if node.present? && (name_changed? || is_deleted_changed?)
-      @freshly_made_node = false
+      @node_updated_details = { name: name, is_deleted: is_deleted }
       node.name = name
       node.is_deleted = is_deleted
       node.save
+      @node_updated_details = false
     end
   end
 end
